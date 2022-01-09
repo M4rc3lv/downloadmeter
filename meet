@@ -1,0 +1,11 @@
+#!/bin/bash
+export LC_ALL=C
+INTERFACE="eno1" #Dit invullen!
+
+DOWNLOAD1=$(ifconfig $INTERFACE | egrep "RX packets" | awk '{print $5}')
+sleep 0.1
+DOWNLOAD2=$(ifconfig $INTERFACE | egrep "RX packets" | awk '{print $5}')
+DownloadSpeed=$(awk "BEGIN {print ($DOWNLOAD2-$DOWNLOAD1)/1024/102.4  }")
+echo "$DownloadSpeed Mb/s"
+
+exit 0
